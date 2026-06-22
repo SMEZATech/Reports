@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SME Solutions Pages — Traffic & Revenue Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --ink:#0F2C3F; --teal:#1B9AAA; --deep:#117A8B; --gold:#E4A11B; --green:#2E8B57;
+  --red:#C0392B; --light:#F4F7F8; --line:#DCE4E7; --mut:#5C6B72; --bg:#EEF2F4; --slate:#94A8B0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px 60px}
+header{background:linear-gradient(135deg,#0F2C3F 0%,#13415A 60%,#117A8B 100%);color:#fff;padding:34px 0 30px;margin-bottom:24px}
+header .wrap{padding-bottom:0}
+.brand{font-size:13px;font-weight:700;letter-spacing:2px;color:#7FD3DE;text-transform:uppercase}
+h1{font-size:29px;font-weight:800;margin:8px 0 6px;letter-spacing:-.5px}
+.meta{font-size:12.5px;color:#9FBAC2;margin-top:10px}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:-44px 0 26px;position:relative;z-index:2}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 14px;box-shadow:0 6px 18px rgba(15,44,63,.06)}
+.kpi .v{font-size:23px;font-weight:800;color:var(--ink);letter-spacing:-.5px}
+.kpi .l{font-size:11px;color:var(--mut);margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.kpi .d{font-size:11px;margin-top:6px;font-weight:600}
+.up{color:var(--green)}.down{color:var(--red)}.amber{color:#B5790A}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:1.55fr 1fr}
+.g2b{grid-template-columns:1fr 1.4fr}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 18px 16px;box-shadow:0 4px 14px rgba(15,44,63,.05)}
+.card h3{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.card .cap{font-size:12px;color:var(--mut);margin-bottom:12px;line-height:1.45}
+.sec-title{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--deep);
+  margin:30px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--teal)}
+.sec-title.lead{font-size:13px;color:var(--ink)}
+.chartbox{position:relative;height:300px}
+.chartbox.sm{height:260px}
+.chartbox.tall{height:420px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:var(--ink);color:#fff;text-align:right;padding:9px 10px;font-weight:600;font-size:12px;cursor:pointer;white-space:nowrap}
+thead th:first-child{text-align:left}
+thead th.asc::after{content:" \25B2";font-size:9px}
+thead th.desc::after{content:" \25BC";font-size:9px}
+tbody td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line)}
+tbody td:first-child{text-align:left;font-weight:700}
+tbody td.url{font-weight:500;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--deep);word-break:break-all}
+tbody td.part{font-weight:500;font-size:12px;color:var(--ink)}
+tbody tr:nth-child(even){background:var(--light)}
+tbody tr:hover{background:#E7F1F3}
+tfoot td{padding:9px 10px;text-align:right;font-weight:800;background:#E7EFF1;border-top:2px solid var(--teal)}
+tfoot td:first-child{text-align:left}
+.green-row td:first-child{border-left:3px solid var(--green)}
+.amber-row td:first-child{border-left:3px solid var(--gold)}
+.sage{color:var(--gold)!important}
+.tablewrap{overflow-x:auto}
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;color:#fff;margin-left:6px}
+.tag.op{background:var(--gold)}
+.note{font-size:11.5px;color:var(--mut);background:#fff;border:1px solid var(--line);border-left:3px solid var(--teal);
+  border-radius:8px;padding:12px 14px;margin-top:14px;line-height:1.55}
+footer{text-align:center;font-size:11.5px;color:var(--mut);margin-top:34px;padding-top:16px;border-top:1px solid var(--line)}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.g2,.g2b{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="brand">SME South Africa &nbsp;•&nbsp; Top Affiliates</div>
+    <h1>SME Solutions Pages — Traffic &amp; Revenue</h1>
+    <div class="meta">Solutions = all <b>/sme-review/</b> category pages &nbsp;|&nbsp; Traffic: GA4, 21 Jun 2025 – 22 Jun 2026 &nbsp;|&nbsp; Revenue: Affiliate Tracker, Jun 2025 – May 2026 &nbsp;|&nbsp; 22 Jun 2026</div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="kpis">
+    <div class="kpi"><div class="v">R 973 535</div><div class="l">Total revenue (12 mo)</div><div class="d up">Zero media spend</div></div>
+    <div class="kpi"><div class="v">14 287</div><div class="l">SME Solutions sessions</div><div class="d">26 review categories</div></div>
+    <div class="kpi"><div class="v">7 of 26</div><div class="l">Categories earning revenue</div><div class="d down">19 not yet monetised</div></div>
+    <div class="kpi"><div class="v">R 606k</div><div class="l">Accounting — top earner</div><div class="d">62% of all revenue</div></div>
+    <div class="kpi"><div class="v">1 263</div><div class="l">Crowdfunding sessions</div><div class="d amber">Top unmonetised page</div></div>
+  </div>
+
+  <div class="sec-title lead">① Solutions that generate revenue — traffic vs money</div>
+  <div class="card">
+    <div class="cap">7 of 26 solution categories currently earn. Accounting alone is 62% of revenue. Click headers to sort.</div>
+    <div class="tablewrap">
+    <table id="monet">
+      <thead><tr>
+        <th data-k="cat">Solution category</th>
+        <th data-k="sess" class="desc">Sessions</th>
+        <th data-k="users">Users</th>
+        <th data-k="ke">Key events</th>
+        <th data-k="rev">Revenue</th>
+        <th data-k="rps">Rev / session</th>
+        <th data-k="part">Earning partner(s)</th>
+      </tr></thead>
+      <tbody></tbody>
+      <tfoot><tr><td>Total — 7 categories</td><td>6 411</td><td>5 934</td><td>39</td><td>R 973 536</td><td>R 152</td><td></td></tr></tfoot>
+    </table>
+    </div>
+  </div>
+
+  <div class="sec-title lead">② Solutions with traffic but no revenue yet — the opportunity</div>
+  <div class="card">
+    <div class="cap">19 categories draw real audiences but currently convert to <b>zero</b> affiliate revenue. Ranked by sessions — the top rows are the biggest untapped monetisation gaps.</div>
+    <div class="tablewrap">
+    <table id="opp">
+      <thead><tr>
+        <th data-k="cat">Solution category</th>
+        <th data-k="sess" class="desc">Sessions</th>
+        <th data-k="users">Users</th>
+        <th data-k="eng">Avg engagement</th>
+        <th data-k="ke">Key events</th>
+        <th data-k="note">Status</th>
+      </tr></thead>
+      <tbody></tbody>
+      <tfoot><tr><td>Total — 19 categories</td><td>7 876</td><td>7 332</td><td>—</td><td>110</td><td></td></tr></tfoot>
+    </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <h3>Traffic vs revenue across the top solution categories</h3>
+    <div class="cap">Bars = 12-month sessions. <span style="color:#B5790A;font-weight:700">Gold = earns revenue</span>, <span style="color:#94A8B0;font-weight:700">grey = no revenue yet</span>. The tall grey bars (Payroll, Crowdfunding, POS, Help desk) are high-traffic pages we are not yet monetising.</div>
+    <div class="chartbox tall"><canvas id="solChart"></canvas></div>
+  </div>
+
+  <div class="sec-title">Revenue Performance</div>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Monthly revenue &amp; lead volume</h3>
+      <div class="cap">Revenue is lumpy — lead volume is a weak predictor (Jul: 120 leads → R 18k vs Sep: 62 leads → R 272k). Strong Mar–May 2026 rebound.</div>
+      <div class="chartbox"><canvas id="revTrend"></canvas></div>
+    </div>
+    <div class="card">
+      <h3>Revenue concentration</h3>
+      <div class="cap">Top 3 partners = 87% of all revenue.</div>
+      <div class="chartbox"><canvas id="revDonut"></canvas></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <h3>Revenue by partner (12 months)</h3>
+    <div class="cap">Sage is the backbone; lenders (Retail Capital, Business Fuel, Lulalend) drive large but irregular payouts.</div>
+    <div class="chartbox" style="height:340px"><canvas id="revPartner"></canvas></div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <div class="cap">Revenue + lead funnel per earning partner. Click headers to sort.</div>
+    <div class="tablewrap">
+    <table id="ptable">
+      <thead><tr>
+        <th data-k="name">Partner</th><th data-k="rev" class="desc">Revenue</th><th data-k="pct">% rev</th>
+        <th data-k="leads">Leads</th><th data-k="conv">Conv.</th><th data-k="cr">Lead→Conv</th><th data-k="sess">Brand-page sessions</th>
+      </tr></thead>
+      <tbody></tbody>
+      <tfoot><tr><td>Total</td><td>R 973 535</td><td>100%</td><td>870</td><td>123</td><td>14.1%</td><td>2 919</td></tr></tfoot>
+    </table>
+    </div>
+  </div>
+
+  <div class="sec-title">Brand Page Traffic — Google Analytics (12 months)</div>
+  <div class="card">
+    <div class="cap">Individual partner brand pages (the conversion layer). Sessions, users and engagement per URL. Click headers to sort.</div>
+    <div class="tablewrap">
+    <table id="btable">
+      <thead><tr>
+        <th data-k="url">Brand page URL</th><th data-k="sess" class="desc">Sessions</th>
+        <th data-k="users">Active users</th><th data-k="eng">Avg engagement</th><th data-k="ke">Key events</th>
+      </tr></thead>
+      <tbody></tbody>
+      <tfoot><tr><td>Total — 23 brand pages</td><td>2 919</td><td>2 651</td><td>—</td><td>26</td></tr></tfoot>
+    </table>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>Disclaimer.</b> This report is confidential and prepared for internal SME South Africa use only. Figures are drawn from Google Analytics 4 and internal affiliate tracker records for the stated periods and are accurate to the best of the author&rsquo;s knowledge at the time of compilation; they may be subject to revision as data is reconciled. This document may not be reproduced, distributed or shared externally without prior written permission.
+  </div>
+
+  <footer>
+    Compiled by <b>Tshepho Joel</b> &nbsp;•&nbsp; SME South Africa — SME Solutions Pages: Traffic &amp; Revenue<br>
+    &copy; 2026 SME South Africa. All rights reserved. Confidential — internal use only.
+  </footer>
+</div>
+
+<script>
+const INK="#0F2C3F",TEAL="#1B9AAA",DEEP="#117A8B",GOLD="#E4A11B",GREEN="#2E8B57",RED="#C0392B",GREY="#9AA7AD",SLATE="#94A8B0";
+const sp=v=>Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g," ");
+const fmtR=v=>"R "+sp(v);
+const fmtN=v=>sp(v);
+const engFmt=s=>{s=Math.round(s); if(s<60)return s+"s"; return Math.floor(s/60)+"m "+(s%60)+"s";};
+
+/* ---------- ① Monetised solution categories ---------- */
+let monet=[
+ {cat:"Accounting software",sess:3048,users:2711,ke:27,rev:606330,part:"Sage, Xero"},
+ {cat:"Business loans",sess:754,users:689,ke:3,rev:257099,part:"Retail Capital, Lulalend, GetFunds, Mzansi Capital"},
+ {cat:"Working capital loans",sess:113,users:107,ke:1,rev:97940,part:"Business Fuel, Growise Capital"},
+ {cat:"CRM platforms",sess:444,users:427,ke:0,rev:10728,part:"Monday.com"},
+ {cat:"Payment gateways",sess:224,users:209,ke:6,rev:1000,part:"Yoco"},
+ {cat:"E-commerce website builders",sess:1558,users:1542,ke:1,rev:279,part:"PrestaShop"},
+ {cat:"Email marketing services",sess:270,users:249,ke:1,rev:160,part:"Brevo"}
+];
+/* ---------- ② Unmonetised solution categories ---------- */
+let opp=[
+ {cat:"Payroll & HR software",sess:1855,users:1792,eng:15,ke:6,note:"Sage serves this via Accounting"},
+ {cat:"Crowdfunding platforms",sess:1263,users:1081,eng:69,ke:77,note:"High intent — no partner"},
+ {cat:"POS systems",sess:954,users:896,eng:34,ke:4,note:"No earning partner"},
+ {cat:"Help desk software",sess:819,users:811,eng:11,ke:0,note:"No earning partner"},
+ {cat:"Purchase order funding",sess:505,users:440,eng:71,ke:5,note:"No earning partner"},
+ {cat:"Business insurance",sess:360,users:336,eng:62,ke:3,note:"No earning partner"},
+ {cat:"Company registration",sess:274,users:248,eng:57,ke:5,note:"Brands listed, R0 earned"},
+ {cat:"Business credit cards",sess:263,users:237,eng:69,ke:1,note:"No earning partner"},
+ {cat:"Commercial law services",sess:209,users:206,eng:23,ke:0,note:"No earning partner"},
+ {cat:"Social media management",sess:205,users:190,eng:23,ke:2,note:"No earning partner"},
+ {cat:"Time & attendance software",sess:191,users:182,eng:39,ke:0,note:"No earning partner"},
+ {cat:"Bridging finance lenders",sess:183,users:177,eng:58,ke:3,note:"Served via Business loans"},
+ {cat:"Fibre service providers",sess:172,users:156,eng:30,ke:3,note:"No earning partner"},
+ {cat:"AI / app website builders",sess:144,users:123,eng:45,ke:0,note:"No earning partner"},
+ {cat:"E-learning platforms",sess:141,users:135,eng:25,ke:0,note:"GetSmarter listed, R0"},
+ {cat:"Web hosting services",sess:128,users:126,eng:21,ke:0,note:"Nexcess listed, R0"},
+ {cat:"Online booking & scheduling",sess:82,users:74,eng:26,ke:1,note:"No earning partner"},
+ {cat:"Inventory loans",sess:76,users:73,eng:7,ke:0,note:"Served via Business loans"},
+ {cat:"Invoicing finance lenders",sess:52,users:49,eng:31,ke:0,note:"Served via Working capital"}
+];
+
+function renderMonet(){
+  document.querySelector("#monet tbody").innerHTML=monet.map(r=>`<tr class="green-row">
+    <td>${r.cat}</td><td>${fmtN(r.sess)}</td><td>${fmtN(r.users)}</td><td>${r.ke}</td>
+    <td>${fmtR(r.rev)}</td><td>${fmtR(r.rev/r.sess)}</td><td class="part">${r.part}</td></tr>`).join("");
+}
+function renderOpp(){
+  document.querySelector("#opp tbody").innerHTML=opp.map(r=>`<tr class="amber-row">
+    <td>${r.cat}</td><td>${fmtN(r.sess)}</td><td>${fmtN(r.users)}</td><td>${engFmt(r.eng)}</td>
+    <td>${r.ke}</td><td class="part">${r.note}</td></tr>`).join("");
+}
+
+/* ---------- Solutions traffic vs revenue chart ---------- */
+const solData=[
+ ["Accounting software",3048,1],["Payroll & HR software",1855,0],["E-commerce builders",1558,1],
+ ["Crowdfunding platforms",1263,0],["POS systems",954,0],["Help desk software",819,0],
+ ["Business loans",754,1],["Purchase order funding",505,0],["CRM platforms",444,1],
+ ["Business insurance",360,0],["Company registration",274,0],["Email marketing",270,1],
+ ["Business credit cards",263,0],["Payment gateways",224,1],["Working capital loans",113,1]
+].sort((a,b)=>a[1]-b[1]);
+new Chart(solChart,{type:"bar",data:{labels:solData.map(x=>x[0]),datasets:[{data:solData.map(x=>x[1]),
+  backgroundColor:solData.map(x=>x[2]?GOLD:SLATE),borderRadius:3}]},
+  options:{indexAxis:"y",maintainAspectRatio:false,plugins:{legend:{display:false},
+    tooltip:{callbacks:{label:c=>fmtN(c.raw)+" sessions — "+(solData[c.dataIndex][2]?"earns revenue":"no revenue yet")}}},
+    scales:{x:{grid:{color:"#ECF0F2"},title:{display:true,text:"Sessions (12 months)"}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+
+/* ---------- Revenue charts ---------- */
+Chart.defaults.font.family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+Chart.defaults.color=INK;Chart.defaults.font.size=11.5;
+const months=["Jun","Jul","Aug","Sep","Oct","Nov","Dec","Jan","Feb","Mar","Apr","May"];
+const mrev=[11438,17687,61995,272450,60561,55230,110277,13724,10128,105375,157025,97646];
+const mleads=[62,120,99,62,109,64,47,62,29,19,12,185];
+new Chart(revTrend,{data:{labels:months,datasets:[
+  {type:"bar",label:"Revenue",data:mrev,backgroundColor:months.map((m,i)=>i===3?GOLD:TEAL),borderRadius:4,yAxisID:"y",order:2},
+  {type:"line",label:"Leads",data:mleads,borderColor:INK,backgroundColor:INK,tension:.3,pointRadius:3,yAxisID:"y1",order:1}
+]},options:{maintainAspectRatio:false,interaction:{mode:"index",intersect:false},
+  plugins:{legend:{labels:{boxWidth:12,usePointStyle:true}},tooltip:{callbacks:{label:c=>c.dataset.label+": "+(c.dataset.yAxisID==="y"?fmtR(c.raw):c.raw)}}},
+  scales:{y:{ticks:{callback:v=>"R "+(v/1000)+"k"},grid:{color:"#ECF0F2"}},
+    y1:{position:"right",grid:{display:false},title:{display:true,text:"Leads"}},x:{grid:{display:false}}}}});
+new Chart(revDonut,{type:"doughnut",data:{labels:["Sage 60%","Retail Capital 17%","Business Fuel 10%","GetFunds 4%","Lulalend 4%","Others 5%"],
+  datasets:[{data:[585588,166270,95340,43478,39351,32049],backgroundColor:[GOLD,TEAL,DEEP,GREEN,"#6FB7C2",GREY],borderColor:"#fff",borderWidth:2}]},
+  options:{maintainAspectRatio:false,cutout:"60%",plugins:{legend:{position:"right",labels:{boxWidth:11,font:{size:11}}},
+    tooltip:{callbacks:{label:c=>c.label.replace(/ \d+%/,"")+": "+fmtR(c.raw)}}}}});
+const pp=["Sage","Retail Capital","Business Fuel","GetFunds","Lulalend","Xero","Monday.com","Mzansi Capital","Growise Capital","Yoco","Other"];
+const pv=[585588,166270,95340,43478,39351,20742,10728,8000,2600,1000,439];
+new Chart(revPartner,{type:"bar",data:{labels:pp,datasets:[{data:pv,backgroundColor:pp.map(p=>p==="Sage"?GOLD:TEAL),borderRadius:4}]},
+  options:{indexAxis:"y",maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmtR(c.raw)}}},
+    scales:{x:{ticks:{callback:v=>"R "+(v/1000)+"k"},grid:{color:"#ECF0F2"}},y:{grid:{display:false}}}}});
+
+/* ---------- Partner table ---------- */
+let prows=[
+ {name:"Sage",rev:585588,pct:60.2,leads:318,conv:75,cr:23.6,sess:790},
+ {name:"Retail Capital",rev:166270,pct:17.1,leads:269,conv:7,cr:2.6,sess:151},
+ {name:"Business Fuel",rev:95340,pct:9.8,leads:44,conv:4,cr:9.1,sess:111},
+ {name:"GetFunds",rev:43478,pct:4.5,leads:0,conv:1,cr:null,sess:111},
+ {name:"Lulalend",rev:39351,pct:4.0,leads:114,conv:14,cr:12.3,sess:320},
+ {name:"Xero",rev:20742,pct:2.1,leads:18,conv:0,cr:0,sess:125},
+ {name:"Monday.com",rev:10728,pct:1.1,leads:12,conv:19,cr:null,sess:109},
+ {name:"Mzansi Capital",rev:8000,pct:0.8,leads:0,conv:1,cr:null,sess:null},
+ {name:"Growise Capital",rev:2600,pct:0.3,leads:80,conv:1,cr:1.3,sess:116},
+ {name:"Yoco",rev:1000,pct:0.1,leads:1,conv:1,cr:null,sess:492},
+ {name:"Brevo",rev:160,pct:0.0,leads:2,conv:0,cr:0,sess:13},
+ {name:"Shopify",rev:0,pct:0.0,leads:10,conv:0,cr:0,sess:67}
+];
+function renderP(){
+  document.querySelector("#ptable tbody").innerHTML=prows.map(r=>`<tr>
+    <td class="${r.name==='Sage'?'sage':''}">${r.name}</td><td>${fmtR(r.rev)}</td><td>${r.pct.toFixed(1)}%</td>
+    <td>${fmtN(r.leads)}</td><td>${r.conv}</td><td>${r.cr===null?'—':r.cr.toFixed(1)+'%'}</td>
+    <td>${r.sess===null?'—':fmtN(r.sess)}</td></tr>`).join("");
+}
+
+/* ---------- Brand page traffic ---------- */
+let brows=[
+ {url:"smesouthafrica.co.za/brands/sage",sess:790,users:712,eng:32,ke:3},
+ {url:"smesouthafrica.co.za/brands/yoco",sess:323,users:286,eng:41,ke:3},
+ {url:"smesouthafrica.co.za/brands/lulalend-loans-review",sess:188,users:168,eng:68,ke:2},
+ {url:"smesouthafrica.co.za/brands/swiftreg",sess:183,users:167,eng:81,ke:1},
+ {url:"smesouthafrica.co.za/brands/yoco-2",sess:169,users:163,eng:31,ke:1},
+ {url:"smesouthafrica.co.za/brands/retail-capital-loans-review",sess:151,users:142,eng:71,ke:1},
+ {url:"smesouthafrica.co.za/brands/company-partners",sess:134,users:110,eng:73,ke:6},
+ {url:"smesouthafrica.co.za/brands/xero",sess:125,users:119,eng:33,ke:1},
+ {url:"smesouthafrica.co.za/brands/growise-capital",sess:116,users:105,eng:110,ke:0},
+ {url:"smesouthafrica.co.za/brands/getfunds",sess:111,users:101,eng:61,ke:2},
+ {url:"smesouthafrica.co.za/brands/business-fuel",sess:111,users:99,eng:50,ke:0},
+ {url:"smesouthafrica.co.za/brands/zoho",sess:92,users:82,eng:49,ke:1},
+ {url:"smesouthafrica.co.za/brands/lulalend-inventory-loans",sess:72,users:70,eng:29,ke:0},
+ {url:"smesouthafrica.co.za/brands/getsmarter-online-learning-platform",sess:60,users:54,eng:41,ke:0},
+ {url:"smesouthafrica.co.za/brands/lulalend-bridging-finance",sess:60,users:56,eng:26,ke:2},
+ {url:"smesouthafrica.co.za/brands/shopify-ecommerce-review",sess:58,users:56,eng:34,ke:0},
+ {url:"smesouthafrica.co.za/brands/monday-com-crm",sess:56,users:47,eng:11,ke:0},
+ {url:"smesouthafrica.co.za/brands/monday-com",sess:53,users:49,eng:29,ke:3},
+ {url:"smesouthafrica.co.za/brands/zoho-desk",sess:21,users:21,eng:17,ke:0},
+ {url:"smesouthafrica.co.za/brands/nexcess-enterprise-web-hosting",sess:17,users:16,eng:14,ke:0},
+ {url:"smesouthafrica.co.za/brands/brevo",sess:13,users:12,eng:17,ke:0},
+ {url:"smesouthafrica.co.za/brands/shopify-pos",sess:9,users:9,eng:78,ke:0},
+ {url:"smesouthafrica.co.za/brands/getresponse",sess:7,users:7,eng:31,ke:0}
+];
+function renderB(){
+  document.querySelector("#btable tbody").innerHTML=brows.map(r=>`<tr>
+    <td class="url">${r.url}</td><td>${fmtN(r.sess)}</td><td>${fmtN(r.users)}</td>
+    <td>${engFmt(r.eng)}</td><td>${r.ke}</td></tr>`).join("");
+}
+
+/* ---------- generic sorter ---------- */
+function makeSortable(id,rows,fn){
+  let st={k:null,dir:-1};
+  document.querySelectorAll("#"+id+" thead th").forEach(th=>{
+    th.addEventListener("click",()=>{
+      const k=th.dataset.k; st.dir=(st.k===k)?-st.dir:-1; st.k=k;
+      rows.sort((a,b)=>{let x=a[k],y=b[k]; if(x===null)x=-1; if(y===null)y=-1;
+        if(typeof x==="string")return st.dir*x.localeCompare(y); return st.dir*(x-y);});
+      document.querySelectorAll("#"+id+" thead th").forEach(t=>t.classList.remove("asc","desc"));
+      th.classList.add(st.dir===1?"asc":"desc"); fn();
+    });
+  });
+}
+renderMonet();renderOpp();renderP();renderB();
+makeSortable("monet",monet,renderMonet);
+makeSortable("opp",opp,renderOpp);
+makeSortable("ptable",prows,renderP);
+makeSortable("btable",brows,renderB);
+</script>
+</body>
+</html>
