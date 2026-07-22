@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Plan Traffic & Queries Report</title>
+    <!-- Import Google Fonts: Oswald for headings, Roboto for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-red: #9c1c1f;
+            --brand-black: #000000;
+            --brand-navy: #0a2c3d;
+            --brand-bg-light: #fcf7f8;
+            --brand-card-bg: #f3f5f9;
+            --brand-white: #ffffff;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--brand-black);
+            line-height: 1.6;
+            background-color: var(--brand-bg-light);
+            padding: 30px 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+            background: var(--brand-white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(10, 44, 61, 0.1);
+        }
+
+        /* Header & Logo */
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid var(--brand-red);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            max-height: 60px;
+            width: auto;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Oswald', sans-serif;
+            margin-top: 0;
+        }
+
+        h1 {
+            color: var(--brand-navy);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 2.2rem;
+            margin: 0;
+        }
+
+        h2 {
+            color: var(--brand-red);
+            margin-top: 40px;
+            font-size: 1.6rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .report-meta {
+            color: var(--brand-navy);
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            background: var(--brand-card-bg);
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid var(--brand-navy);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .summary-cards {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap; /* Ensure responsiveness */
+        }
+        .card {
+            flex: 1 1 calc(25% - 20px);
+            min-width: 150px;
+            background: var(--brand-card-bg);
+            padding: 25px 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-top: 4px solid var(--brand-navy);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+            color: var(--brand-navy);
+            text-transform: uppercase;
+        }
+        .card p {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--brand-red);
+        }
+
+        .table-container {
+            overflow-x: auto; /* Handle overflow on small screens */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            min-width: 600px; /* Prevent squishing on small screens */
+        }
+        th, td {
+            padding: 14px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            background-color: var(--brand-navy);
+            color: var(--brand-white);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            font-size: 1.05rem;
+        }
+        tr:hover {
+            background-color: var(--brand-card-bg);
+        }
+        .highlight {
+            font-weight: 700;
+            color: var(--brand-red);
+        }
+
+        /* Pagination Styles */
+        .pagination-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 15px;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+        .pagination-btn {
+            background-color: var(--brand-navy);
+            color: var(--brand-white);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.2s;
+        }
+        .pagination-btn:hover:not(:disabled) {
+            background-color: var(--brand-red);
+        }
+        .pagination-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .page-info {
+            color: var(--brand-navy);
+            font-weight: 500;
+        }
+
+        /* Hide rows class for pagination */
+        .hidden-row {
+            display: none;
+        }
+        
+        /* Links */
+        a {
+            color: var(--brand-navy);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: var(--brand-red);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-container">
+        <h1>Business Plan Traffic & Queries Report</h1>
+        <img src="https://smesouthafrica.co.za/wp-content/uploads/2025/10/Asset-1-1.webp" alt="SME South Africa Logo" class="logo">
+    </div>
+    
+    <div class="report-meta">
+        <div>
+            <strong>Report Range:</strong> Jan 22, 2026 &ndash; Jul 22, 2026 (Last 6 Months)<br>
+            <strong>Data Source:</strong> <code>smesouthafrica.co.za-Performance-on-Search-2026-07-22.xlsx</code>
+        </div>
+        <div style="text-align: right;">
+            <strong>Search Type:</strong> Web<br>
+            <strong>Query Filter:</strong> "+business plan"
+        </div>
+    </div>
+
+    <h2>1. Executive Summary (6-Month View)</h2>
+    <div class="summary-cards">
+        <div class="card">
+            <h3>Total Related Queries</h3>
+            <p>1,000</p>
+        </div>
+        <div class="card">
+            <h3>Total Clicks</h3>
+            <p>284</p>
+        </div>
+        <div class="card">
+            <h3>Total Impressions</h3>
+            <p>15,538</p>
+        </div>
+        <div class="card">
+            <h3>Average CTR</h3>
+            <p>1.83%</p>
+        </div>
+    </div>
+
+    <h2>2. Timeline: Last 6 Months</h2>
+    <p>A breakdown of the highest-performing months for "business plan" related searches over the last six months.</p>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Clicks</th>
+                    <th>Impressions</th>
+                    <th>Avg. CTR</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>January 2026</td>
+                    <td class="highlight">125</td>
+                    <td>5,666</td>
+                    <td>2.21%</td>
+                </tr>
+                <tr>
+                    <td>February 2026</td>
+                    <td class="highlight">41</td>
+                    <td>3,217</td>
+                    <td>1.27%</td>
+                </tr>
+                <tr>
+                    <td>March 2026</td>
+                    <td class="highlight">49</td>
+                    <td>3,336</td>
+                    <td>1.47%</td>
+                </tr>
+                <tr>
+                    <td>April 2026</td>
+                    <td class="highlight">32</td>
+                    <td>1,790</td>
+                    <td>1.79%</td>
+                </tr>
+                <tr>
+                    <td>May 2026</td>
+                    <td class="highlight">18</td>
+                    <td>2,221</td>
+                    <td>0.81%</td>
+                </tr>
+                 <tr>
+                    <td>June 2026</td>
+                    <td class="highlight">13</td>
+                    <td>2,058</td>
+                    <td>0.63%</td>
+                </tr>
+                <tr>
+                    <td>July 2026 (MTD)</td>
+                    <td class="highlight">6</td>
+                    <td>1,250</td>
+                    <td>0.48%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>3. Top Landing Pages by Clicks</h2>
+    <p>These are the specific articles and resources successfully capturing the "business plan" search intent.</p>
+    <div class="table-container">
+        <table id="pagesTable">
+            <thead>
+                <tr>
+                    <th>Landing Page URL</th>
+                    <th>Clicks</th>
+                    <th>Impressions</th>
+                    <th>Avg. Position</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="https://smesouthafrica.co.za/sme-resources/business-plan-template-for-small-businesses/" target="_blank">.../business-plan-template-for-small-businesses/</a></td>
+                    <td class="highlight">196</td>
+                    <td>17,009</td>
+                    <td>27.57</td>
+                </tr>
+                <tr>
+                    <td><a href="https://smesouthafrica.co.za/what-is-needed-to-start-a-poultry-farm-business/" target="_blank">.../what-is-needed-to-start-a-poultry-farm-business/</a></td>
+                    <td class="highlight">132</td>
+                    <td>7,809</td>
+                    <td>23.91</td>
+                </tr>
+                <tr>
+                    <td><a href="https://smesouthafrica.co.za/how-to-start-a-kota-business/" target="_blank">.../how-to-start-a-kota-business/</a></td>
+                    <td class="highlight">122</td>
+                    <td>1,871</td>
+                    <td>7.52</td>
+                </tr>
+                <tr>
+                    <td><a href="https://smesouthafrica.co.za/how-to-start-a-gas-refill-business-in-south-africa/" target="_blank">.../how-to-start-a-gas-refill-business-in-south-africa/</a></td>
+                    <td class="highlight">103</td>
+                    <td>2,689</td>
+                    <td>15.89</td>
+                </tr>
+                <tr>
+                    <td><a href="https://smesouthafrica.co.za/a-guide-to-launching-a-shisanyama-business/" target="_blank">.../a-guide-to-launching-a-shisanyama-business/</a></td>
+                    <td class="highlight">93</td>
+                    <td>1,935</td>
+                    <td>6.52</td>
+                </tr>
+                <tr>
+                    <td><a href="https://smesouthafrica.co.za/how-to-start-a-cleaning-services-business/" target="_blank">.../how-to-start-a-cleaning-services-business/</a></td>
+                    <td class="highlight">87</td>
+                    <td>4,044</td>
+                    <td>23.31</td>
+                </tr>
+                <tr>
+                    <td><a href="https://smesouthafrica.co.za/how-to-start-a-pig-farming-business/" target="_blank">.../how-to-start-a-pig-farming-business/</a></td>
+                    <td class="highlight">48</td>
+                    <td>3,196</td>
+                    <td>22.07</td>
+                </tr>
+                <tr>
+                    <td><a href="https://smesouthafrica.co.za/how-to-draft-a-business-plan/" target="_blank">.../how-to-draft-a-business-plan/</a></td>
+                    <td class="highlight">43</td>
+                    <td>18,933</td>
+                    <td>38.28</td>
+                </tr>
+                <tr>
+                    <td><a href="https://smesouthafrica.co.za/how-to-start-a-scooter-delivery-business/" target="_blank">.../how-to-start-a-scooter-delivery-business/</a></td>
+                    <td class="highlight">40</td>
+                    <td>853</td>
+                    <td>13.15</td>
+                </tr>
+                <tr>
+                    <td><a href="https://smesouthafrica.co.za/what-is-seda-business-funding/" target="_blank">.../what-is-seda-business-funding/</a></td>
+                    <td class="highlight">28</td>
+                    <td>1,369</td>
+                    <td>6.46</td>
+                </tr>
+                 <tr>
+                    <td><a href="https://smesouthafrica.co.za/how-to-start-a-cleaning-business-in-south-africa/" target="_blank">.../how-to-start-a-cleaning-business-in-south-africa/</a></td>
+                    <td class="highlight">68</td>
+                    <td>4,307</td>
+                    <td>22.15</td>
+                </tr>
+                <tr>
+                    <td><a href="https://smesouthafrica.co.za/everything-you-need-to-know-to-start-a-farming-business/" target="_blank">.../everything-you-need-to-know-to-start-a-farming-business/</a></td>
+                    <td class="highlight">52</td>
+                    <td>1,514</td>
+                    <td>18.11</td>
+                </tr>
+                <tr>
+                    <td><a href="https://smesouthafrica.co.za/how-to-start-a-laundry-business/" target="_blank">.../how-to-start-a-laundry-business/</a></td>
+                    <td class="highlight">47</td>
+                    <td>1,544</td>
+                    <td>11.08</td>
+                </tr>
+                <tr>
+                    <td><a href="https://smesouthafrica.co.za/how-to-start-an-event-planning-business-2/" target="_blank">.../how-to-start-an-event-planning-business-2/</a></td>
+                    <td class="highlight">43</td>
+                    <td>2,112</td>
+                    <td>21.84</td>
+                </tr>
+                <tr>
+                    <td><a href="https://smesouthafrica.co.za/how-to-start-a-car-wash-business-in-south-africa/" target="_blank">.../how-to-start-a-car-wash-business-in-south-africa/</a></td>
+                    <td class="highlight">37</td>
+                    <td>635</td>
+                    <td>9.03</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pagination-container">
+            <button id="pagesPrevBtn" class="pagination-btn" onclick="prevPage('pages')" disabled>Previous</button>
+            <span id="pagesPageInfo" class="page-info">Page 1 of 3</span>
+            <button id="pagesNextBtn" class="pagination-btn" onclick="nextPage('pages')">Next</button>
+        </div>
+    </div>
+
+    <h2>4. Top User Queries by Clicks</h2>
+    <p>The specific keywords driving traffic to the landing pages above.</p>
+    <div class="table-container">
+        <table id="queriesTable">
+            <thead>
+                <tr>
+                    <th>Top Queries</th>
+                    <th>Clicks</th>
+                    <th>Impressions</th>
+                    <th>Avg. Position</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>business plan template south africa</td>
+                    <td class="highlight">95</td>
+                    <td>2,682</td>
+                    <td>12.16</td>
+                </tr>
+                <tr>
+                    <td>kota business plan</td>
+                    <td class="highlight">75</td>
+                    <td>794</td>
+                    <td>3.24</td>
+                </tr>
+                <tr>
+                    <td>poultry farming business plan</td>
+                    <td class="highlight">63</td>
+                    <td>2,672</td>
+                    <td>13.87</td>
+                </tr>
+                <tr>
+                    <td>shisanyama business plan</td>
+                    <td class="highlight">54</td>
+                    <td>665</td>
+                    <td>2.51</td>
+                </tr>
+                <tr>
+                    <td>gas refill business plan pdf</td>
+                    <td class="highlight">47</td>
+                    <td>1,553</td>
+                    <td>8.80</td>
+                </tr>
+                <tr>
+                    <td>motorbike delivery business plan</td>
+                    <td class="highlight">32</td>
+                    <td>114</td>
+                    <td>2.50</td>
+                </tr>
+                <tr>
+                    <td>seda business plan</td>
+                    <td class="highlight">30</td>
+                    <td>1,166</td>
+                    <td>5.03</td>
+                </tr>
+                <tr>
+                    <td>cleaning company business plan</td>
+                    <td class="highlight">27</td>
+                    <td>891</td>
+                    <td>18.18</td>
+                </tr>
+                <tr>
+                    <td>gas refill business plan</td>
+                    <td class="highlight">24</td>
+                    <td>109</td>
+                    <td>4.15</td>
+                </tr>
+                <tr>
+                    <td>kota business plan pdf download</td>
+                    <td class="highlight">23</td>
+                    <td>366</td>
+                    <td>5.17</td>
+                </tr>
+                <tr>
+                    <td>laundry business plan</td>
+                    <td class="highlight">21</td>
+                    <td>450</td>
+                    <td>9.20</td>
+                </tr>
+                <tr>
+                    <td>pig farming business plan</td>
+                    <td class="highlight">19</td>
+                    <td>820</td>
+                    <td>15.40</td>
+                </tr>
+                <tr>
+                    <td>business plan template</td>
+                    <td class="highlight">17</td>
+                    <td>1,823</td>
+                    <td>21.34</td>
+                </tr>
+                <tr>
+                    <td>event management business plan</td>
+                    <td class="highlight">16</td>
+                    <td>310</td>
+                    <td>11.50</td>
+                </tr>
+                <tr>
+                    <td>car wash business plan</td>
+                    <td class="highlight">15</td>
+                    <td>280</td>
+                    <td>8.90</td>
+                </tr>
+            </tbody>
+        </table>
+         <div class="pagination-container">
+            <button id="queriesPrevBtn" class="pagination-btn" onclick="prevPage('queries')" disabled>Previous</button>
+            <span id="queriesPageInfo" class="page-info">Page 1 of 3</span>
+            <button id="queriesNextBtn" class="pagination-btn" onclick="nextPage('queries')">Next</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const rowsPerPage = 5;
+    
+    const tablesState = {
+        'pages': {
+            currentPage: 1,
+            tableId: 'pagesTable',
+            prevBtnId: 'pagesPrevBtn',
+            nextBtnId: 'pagesNextBtn',
+            infoId: 'pagesPageInfo'
+        },
+        'queries': {
+            currentPage: 1,
+            tableId: 'queriesTable',
+            prevBtnId: 'queriesPrevBtn',
+            nextBtnId: 'queriesNextBtn',
+            infoId: 'queriesPageInfo'
+        }
+    };
+
+    function displayTable(type) {
+        const state = tablesState[type];
+        const table = document.getElementById(state.tableId);
+        const tbody = table.querySelector('tbody');
+        const rows = tbody.querySelectorAll('tr');
+        const totalRows = rows.length;
+        const totalPages = Math.ceil(totalRows / rowsPerPage);
+
+        // Hide all rows
+        rows.forEach(row => row.classList.add('hidden-row'));
+
+        // Calculate start and end indices
+        const start = (state.currentPage - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+
+        // Show rows for current page
+        for (let i = start; i < end && i < totalRows; i++) {
+            rows[i].classList.remove('hidden-row');
+        }
+
+        // Update buttons and info
+        document.getElementById(state.infoId).innerText = `Page ${state.currentPage} of ${totalPages}`;
+        
+        document.getElementById(state.prevBtnId).disabled = state.currentPage === 1;
+        document.getElementById(state.nextBtnId).disabled = state.currentPage === totalPages;
+    }
+
+    function prevPage(type) {
+        if (tablesState[type].currentPage > 1) {
+            tablesState[type].currentPage--;
+            displayTable(type);
+        }
+    }
+
+    function nextPage(type) {
+        const state = tablesState[type];
+        const table = document.getElementById(state.tableId);
+        const totalRows = table.querySelector('tbody').querySelectorAll('tr').length;
+        const totalPages = Math.ceil(totalRows / rowsPerPage);
+
+        if (state.currentPage < totalPages) {
+            state.currentPage++;
+            displayTable(type);
+        }
+    }
+
+    // Initialize tables
+    window.onload = function() {
+        displayTable('pages');
+        displayTable('queries');
+    };
+</script>
+
+</body>
+</html>
