@@ -113,12 +113,12 @@ footer{padding:36px 0 60px;color:var(--mut);font-size:13.5px}
     <li><b>81% of the loss is lost rankings.</b> Our biggest "business ideas", "make money" and funding articles dropped from the top of page one to page two or lower, so Google shows them far less. This is the part we can win back.</li>
     <li><b>19% is fewer clicks for the same ranking.</b> Google now answers many questions on the results page itself (AI Overviews). Even in positions 1 to 3, our click rate halved, from 6.3% to 3.0%. Every publisher is seeing this and it will not reverse.</li>
     <li><b>The loss is concentrated.</b> 50 articles hold half of it. Recovery is a focused job, not a whole-site rebuild.</li>
-    <li><b>It was not a penalty, a technical fault or less publishing.</b> We appear for more searches and more pages than a year ago, and kept publishing 34 to 68 articles a month.</li>
+    <li><b>It was not the move to a membership platform, a penalty, a technical fault or less publishing.</b> Our articles stayed open to Google after the membership rebuild, the fall began before it, and we kept publishing 34 to 68 articles a month.</li>
     <li><b>The decline has stopped but not reversed.</b> The low point was June 2026 (7 500 clicks). Repairs in September lifted us back onto page one for most searches, but mostly in positions 4 to 10, where few people click.</li>
    </ol>
   </div>
   <div class="toc">
-   <a href="#live">Live numbers</a><a href="#year">The 12 months</a><a href="#why">Why it happened</a><a href="#where">Where we lost</a><a href="#not">What it was not</a><a href="#ga4">A note on Analytics</a><a href="#evidence">Search Console screenshots</a><a href="#plan">The plan</a>
+   <a href="#live">Live numbers</a><a href="#year">The 12 months</a><a href="#why">Why it happened</a><a href="#where">Where we lost</a><a href="#membership">Membership</a><a href="#not">What it was not</a><a href="#ga4">A note on Analytics</a><a href="#evidence">Search Console screenshots</a><a href="#plan">Recommendations</a>
   </div>
  </div>
 </section>
@@ -188,7 +188,7 @@ footer{padding:36px 0 60px;color:var(--mut);font-size:13.5px}
   <h3>Cause 2: Google answers the question itself (19%)</h3>
   <figure><img src="img/c4-ctr-by-position.png" alt="Click rate by position, 2025 vs 2026">
    <figcaption><b>In the same position, fewer than half as many people click.</b> In positions 1 to 3 our click rate fell from 6.3% to 3.0%; in positions 4 to 10 from 1.4% to 0.5%.</figcaption></figure>
-  <div class="callout n"><b>This matches the industry.</b> Independent studies of Google's AI Overviews find the same effect: Ahrefs measured a <b>58%</b> lower click rate for the top result on searches that show an AI Overview (300 000 keywords, December 2025), and Seer Interactive measured about <b>61%</b>. Our fall in positions 1 to 3 (52%) sits in that range. This part of the loss is the market, not our content, and recovering rankings will not fully bring it back.</div>
+  <div class="callout n"><b>This matches the industry.</b> Independent studies of Google's AI Overviews find the same effect: <a href="https://ahrefs.com/blog/ai-overviews-reduce-clicks-update/">Ahrefs</a> measured a <b>58%</b> lower click rate for the top result on searches that show an AI Overview (300 000 keywords, December 2025), and Seer Interactive measured about <b>61%</b>. Our fall in positions 1 to 3 (52%) sits in that range. This part of the loss is the market, not our content, and recovering rankings will not fully bring it back.</div>
  </div>
 </section>
 
@@ -223,9 +223,25 @@ footer{padding:36px 0 60px;color:var(--mut);font-size:13.5px}
  </div>
 </section>
 
-<section class="alt" id="not">
+<section class="alt" id="membership">
  <div class="w">
-  <div class="eyebrow">4. What it was not</div>
+  <div class="eyebrow">4. The membership question</div>
+  <h2>Did becoming a membership platform cause the drop?</h2>
+  <p class="lede">It was a fair question: the site was rebuilt as a membership platform at the end of January 2026, right in the steepest part of the fall. We tested it four ways. <b>The answer is no.</b></p>
+  <figure><img src="img/c11-membership-timeline.png" alt="Daily search impressions around the membership rebuild">
+   <figcaption><b>The timing does not fit.</b> Google started showing us less on about 21 January, nine days before the rebuild went live (30 January) and two weeks before the members-only areas were locked (5 to 11 February). The fall did not speed up after either date.</figcaption></figure>
+  <div class="not">
+   <div><b>Articles stayed open</b><p>The rebuild kept every article public and visible to Google. Archived copies of our biggest article from before and after the rebuild show the same title, heading and text, and no "do not index" tag.</p></div>
+   <div><b>Locked areas never ranked</b><p>Groups, forums, the activity feed, messages and the Hub never brought search clicks, so locking them cost nothing. Member profiles, which stay public, now earn about 700 clicks a quarter.</p></div>
+   <div><b>Resources: under 1%</b><p>The resource library lost about 880 search clicks after its sign-up wall, less than 1% of the 113 000 lost. The wall was replaced by an email-only download in July 2026.</p></div>
+  </div>
+  <div class="callout n"><b>One thing the rebuild did change:</b> the same article page is about 40% heavier than before (252 KB to 352 KB). We cannot link that to the drop, but lighter pages load faster on phones, and it is in the recommendations below.</div>
+ </div>
+</section>
+
+<section id="not">
+ <div class="w">
+  <div class="eyebrow">5. What it was not</div>
   <h2>Ruling out the other explanations</h2>
   <figure><img src="img/c10-publishing.png" alt="Articles published per month vs Google clicks">
    <figcaption><b>Publishing stayed steady</b> at 34 to 68 new articles a month throughout the decline.</figcaption></figure>
@@ -240,19 +256,19 @@ footer{padding:36px 0 60px;color:var(--mut);font-size:13.5px}
  </div>
 </section>
 
-<section id="ga4">
+<section class="alt" id="ga4">
  <div class="w">
-  <div class="eyebrow">5. A note on the numbers</div>
+  <div class="eyebrow">6. A note on the numbers</div>
   <h2>Why Google Analytics looks better than it is</h2>
   <figure><img src="img/c9-ga4-direct.png" alt="Organic visits vs Direct visits and engagement in Google Analytics">
    <figcaption><b>Total visits in Analytics hide the search decline.</b> From April 2026 "Direct" visits rose from about 17 000 to 40 000 to 52 000 a month while their engagement rate fell from about 50% to 9% to 15%, with an average visit of 30 to 40 seconds. Only 29% to 33% of them come from South Africa; Singapore and the United States make up most of the rest. That is automated (bot) traffic, not readers.</figcaption></figure>
-  <div class="callout">Real search visitors behave the same as a year ago: organic engagement is steady at 59% to 76%. When we report traffic, we use Google Search Console and the organic channel, not total visits. Filtering the bot traffic out of Analytics is part of the plan below.</div>
+  <div class="callout">Real search visitors behave the same as a year ago: organic engagement is steady at 59% to 76%. When we report traffic, we use Google Search Console and the organic channel, not total visits. Filtering the bot traffic out of Analytics is one of the recommendations below.</div>
  </div>
 </section>
 
-<section class="alt shots" id="evidence">
+<section class="shots" id="evidence">
  <div class="w">
-  <div class="eyebrow">6. Evidence</div>
+  <div class="eyebrow">7. Evidence</div>
   <h2>Straight from Google Search Console</h2>
   <p class="lede">Screenshots of our Search Console account (web search, smesouthafrica.co.za), taken on 10 November 2026.</p>
   <div class="two">
@@ -265,9 +281,9 @@ footer{padding:36px 0 60px;color:var(--mut);font-size:13.5px}
  </div>
 </section>
 
-<section id="plan">
+<section class="alt" id="plan">
  <div class="w">
-  <div class="eyebrow">7. The response</div>
+  <div class="eyebrow">8. Recommendations</div>
   <h2>What we have done and what comes next</h2>
   <h3>Done so far</h3>
   <ul style="padding-left:20px">
@@ -275,19 +291,21 @@ footer{padding:36px 0 60px;color:var(--mut);font-size:13.5px}
    <li><b>September 2026:</b> repaired older articles (titles, descriptions, links and updated facts).</li>
    <li><b>Result:</b> the decline stopped. Exposure is up 58% to 78% from the June low, and our average position improved from about 21 to about 13. Clicks have not yet followed, because we are mostly in positions 4 to 10.</li>
   </ul>
-  <h3>Next 90 days</h3>
+  <h3>Recommendations</h3>
   <div class="plan">
-   <div><h4>1. Win back the top 50</h4><p>Rework the 50 articles that hold half the loss, one at a time, in order of value: first-hand South African detail, current figures, and the quick answers Google now shows at the top.</p><p><b>Measure:</b> top-3 positions for the main search term of each article.</p></div>
-   <div><h4>2. Build what AI cannot answer</h4><p>Content Google cannot summarise away: our own data, tools, funding desk outcomes, events, podcast and the community. People come for these by name, as the brand searches show.</p><p><b>Measure:</b> brand and direct-to-tool visits.</p></div>
-   <div><h4>3. Report clean numbers</h4><p>Filter bot traffic out of Analytics, and track this page's live comparison monthly so recovery is visible against the same period last year.</p><p><b>Measure:</b> one clean monthly traffic figure.</p></div>
+   <div><h4>1. Win back the top 50 articles</h4><p>Half the loss sits in 50 articles. Rework them one at a time, biggest first, with first-hand South African detail, current figures and a short direct answer at the top. This is where the 81% can be recovered.</p></div>
+   <div><h4>2. One strong page per big search</h4><p>On searches like "business ideas" and "business funding", several of our pages compete with each other. Choose one page to lead each big search and point the others to it.</p></div>
+   <div><h4>3. Use membership as the answer to AI</h4><p>The 19% lost to AI answers will not come back from Google. Members, events, the funding desk, tools and the community give people reasons to come to us directly, without a search.</p></div>
+   <div><h4>4. Lighten the article pages</h4><p>Article pages are about 40% heavier since the rebuild. Trim the template so pages load fast on phones, where two thirds of our search visitors are.</p></div>
+   <div><h4>5. Report one clean number</h4><p>Filter the bot traffic out of Analytics and judge search by Search Console. The live panel at the top of this report compares every month with the same period last year.</p></div>
+   <div><h4>6. Judge success on rankings</h4><p>Because Google now gives fewer clicks for the same position, measure progress by top-3 rankings for our big searches and by member growth, not by clicks alone.</p></div>
   </div>
-  <div class="callout n" style="margin-top:26px"><b>The honest outlook.</b> The 81% caused by lost rankings can be won back article by article, and the top 50 pages are where to start. The 19% caused by AI answers will not come back; growth beyond that has to come from reasons to visit us directly.</div>
+  <div class="callout n" style="margin-top:26px"><b>The outlook.</b> The 81% lost through rankings can be won back article by article, starting with the top 50. The 19% lost to AI answers will not come back; growth beyond that comes from the membership platform giving people reasons to visit us directly.</div>
  </div>
 </section>
 
 <footer>
  <div class="w">
-  <p><b>Method and sources.</b> Google Search Console, web search only, 12 July 2025 to 7 November 2026. The year-on-year comparisons use the same 90 days a year apart: 11 August to 8 November 2025 against 10 August to 7 November 2026. Positions and click rates by band are measured per search term. Visits: Google Analytics 4. Publishing counts: the live WordPress database. Google update dates: Google Search Status Dashboard, as reported by <a href="https://www.searchenginejournal.com/google-confirms-march-2026-core-update-is-complete/571459/">Search Engine Journal</a> and others. Industry click-rate studies: <a href="https://ahrefs.com/blog/ai-overviews-reduce-clicks-update/">Ahrefs, AI Overviews reduce clicks by 58%</a>; Seer Interactive as cited there. Every figure in this report is measured; where a cause is not proven, the report says so.</p>
   <p>SME South Africa &middot; Internal report &middot; 10 November 2026</p>
  </div>
 </footer>
