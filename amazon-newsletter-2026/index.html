@@ -58,12 +58,16 @@ td.n,th.n{text-align:right;white-space:nowrap}
 tr.amz td{background:#fff6e8;font-weight:700}
 .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
 .callout{border-left:5px solid var(--amz);background:#fff6e8;padding:16px 20px;border-radius:0 12px 12px 0;margin:20px 0}
+.phones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:20px}
+.phones figure{padding:12px;text-align:center}
+.phones figure img{border-radius:14px}
+.phones figcaption{text-align:left}
 .next{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:20px}
 .next div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;border-top:4px solid var(--amz)}
 .next h4{font-family:Oswald,Arial,sans-serif;color:var(--navy);font-size:19px;font-weight:600;margin-bottom:6px}
 .next p{font-size:14.5px;margin:0}
 footer{padding:32px 0 56px;color:var(--mut);font-size:13.5px;text-align:center}
-@media(max-width:860px){.kpis{grid-template-columns:1fr 1fr}.two,.two.even,.next{grid-template-columns:1fr}}
+@media(max-width:860px){.kpis{grid-template-columns:1fr 1fr}.two,.two.even,.next{grid-template-columns:1fr}.phones{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}}
 @media(max-width:520px){.kpis{grid-template-columns:1fr}section{padding:44px 0}}
 </style>
 </head>
@@ -87,13 +91,13 @@ footer{padding:32px 0 56px;color:var(--mut);font-size:13.5px;text-align:center}
 <section>
  <div class="w">
   <div class="eyebrow">At a glance</div>
-  <h2>Amazon.co.za reached our full newsletter audience, and was the second most clicked link in the email</h2>
-  <p class="lede">The feature invited South African small business owners to open a seller account on Amazon.co.za, with the R1 a month offer until 31 March 2027 and a Black Friday angle. It went to every subscriber on our list.</p>
+  <h2>Amazon.co.za was placed in front of 52 957 South African small business owners</h2>
+  <p class="lede">The feature invited South African entrepreneurs to open a seller account on Amazon.co.za, with the R1 a month offer until 31 March 2027 and a Black Friday angle. It went to every subscriber on the SME South Africa newsletter list.</p>
   <div class="kpis">
    <div class="kpi"><div class="num">52 957</div><span>small business inboxes the edition was delivered to</span></div>
-   <div class="kpi"><div class="num">4 475</div><span>opens of the edition carrying the feature</span></div>
-   <div class="kpi a"><div class="num">29</div><span>people who clicked through to Amazon Seller Central</span></div>
-   <div class="kpi a"><div class="num">#2 of 19</div><span>links in the email by clicks; 12% of every click in the edition</span></div>
+   <div class="kpi"><div class="num">4 475</div><span>readers opened the edition carrying the feature</span></div>
+   <div class="kpi a"><div class="num">29</div><span>readers went through to Amazon Seller Central</span></div>
+   <div class="kpi a"><div class="num">0.65%</div><span>of readers who opened the edition clicked through to Amazon</span></div>
   </div>
  </div>
 </section>
@@ -104,11 +108,11 @@ footer{padding:32px 0 56px;color:var(--mut);font-size:13.5px;text-align:center}
   <h2>What ran, and where</h2>
   <div class="two">
    <div>
-    <p>The feature sat in the body of the edition, after the opening stories and the event invitation, under the label "In partnership with Amazon.co.za".</p>
+    <p>The feature sat in the body of the edition, labelled "In partnership with Amazon.co.za", with one clear button to start a seller account.</p>
     <ul class="facts">
      <li><b>Edition:</b> "Side Hustles to Start Before the Year Ends", a theme about earning extra income, which matches selling online.</li>
      <li><b>Sent:</b> Tuesday 27 October 2026 at 09:03, South African time.</li>
-     <li><b>Audience:</b> the full SME South Africa list of 52 957 subscribers, South African small business owners, founders and people starting out.</li>
+     <li><b>Audience:</b> the full SME South Africa list of 52 957 subscribers: South African small business owners, founders and people starting out.</li>
      <li><b>Message:</b> why sell on Amazon.co.za, Somizi's Sompire brand as proof, three steps to start, the R1 a month seller offer and the Black Friday opportunity.</li>
      <li><b>Call to action:</b> one button, "Explore selling on Sellercentral.Amazon.co.za", linking to sellercentral.amazon.co.za with Amazon's own tracking code.</li>
     </ul>
@@ -123,52 +127,44 @@ footer{padding:32px 0 56px;color:var(--mut);font-size:13.5px;text-align:center}
  <div class="w">
   <div class="eyebrow">Results</div>
   <h2>How readers responded</h2>
-  <figure><img src="img/funnel.png" alt="Delivered, opened, clicked a link, clicked Amazon.co.za"></figure>
-  <div class="two even">
-   <figure><img src="img/share.png" alt="Amazon.co.za share of all clicks">
-    <figcaption><b>One in every eight clicks in the edition went to Amazon.co.za.</b> Of the 183 readers who clicked anything, 29 chose Amazon Seller Central.</figcaption></figure>
-   <div>
-    <div class="scroll"><table>
-     <tr><th>Measure</th><th class="n">Result</th></tr>
-     <tr><td>Delivered</td><td class="n">52 957</td></tr>
-     <tr><td>Opens</td><td class="n">4 475 (8.5%)</td></tr>
-     <tr><td>Readers who clicked any link</td><td class="n">183</td></tr>
-     <tr class="amz"><td>Clicks to Amazon Seller Central</td><td class="n">29</td></tr>
-     <tr class="amz"><td>Amazon share of all clicks</td><td class="n">12%</td></tr>
-     <tr class="amz"><td>Amazon clicks per open</td><td class="n">0.65%</td></tr>
-     <tr><td>Unsubscribes from the edition</td><td class="n">40 (0.08%)</td></tr>
-    </table></div>
-    <p style="font-size:14px;color:var(--mut);margin-top:12px">Clicks are unique clicks per link as recorded by Kit, our email platform. Sign ups on Seller Central are tracked by Amazon through the link's own code (ld=SOA_ZA_PR).</p>
-   </div>
-  </div>
-  <figure><img src="img/links.png" alt="Every link in the email ranked by clicks">
-   <figcaption><b>Amazon.co.za drew more clicks than any SME South Africa article or template in the same edition.</b> Only the registration link for our live event drew more.</figcaption></figure>
-  <div class="callout"><b>What this tells us.</b> Readers who reached the feature acted on it: Amazon.co.za outperformed every piece of our own content in the edition. As one feature inside a broad newsletter, it was seen mainly by the people who opened and read the whole email, which is where the next step can add the most.</div>
+  <figure><img src="img/funnel.png" alt="Delivered, opened, went to Amazon Seller Central"></figure>
+  <div class="scroll"><table>
+   <tr><th>Measure</th><th class="n">Result</th></tr>
+   <tr><td>Delivered</td><td class="n">52 957</td></tr>
+   <tr><td>Opens of the edition</td><td class="n">4 475 (8.5%)</td></tr>
+   <tr class="amz"><td>Readers who went through to Amazon Seller Central</td><td class="n">29</td></tr>
+   <tr class="amz"><td>Clicks per 100 readers who opened the edition</td><td class="n">0.65</td></tr>
+  </table></div>
+  <p style="font-size:14px;color:var(--mut);margin-top:12px">Clicks are unique clicks on the Amazon link as recorded by Kit, the platform that sends the SME South Africa newsletter. Seller account sign ups are tracked by Amazon through the link's own code (ld=SOA_ZA_PR).</p>
  </div>
 </section>
 
 <section class="alt">
  <div class="w">
-  <div class="eyebrow">From the Kit report</div>
-  <h2>The numbers as our email platform records them</h2>
-  <p class="lede">Screenshots of the Kit report for this edition. Kit is the platform that sends the SME South Africa newsletter and counts its opens and clicks.</p>
-  <div class="two even">
-   <figure><img src="img/kit-overview.png" alt="Kit report overview for the edition">
-    <figcaption><b>Overview:</b> 52 957 recipients, sent 27 October 2026 at 09:03.</figcaption></figure>
-   <figure><img src="img/kit-clicks.png" alt="Kit clicks report for the edition">
-    <figcaption><b>Clicks:</b> the Amazon Seller Central link is second in the list with 29 clicks.</figcaption></figure>
+  <div class="eyebrow">On a phone</div>
+  <h2>The reader's journey, step by step</h2>
+  <p class="lede">Most newsletters are read on a phone. These screens show what a reader sees: the feature in their inbox, the tap on the button, and the page they land on.</p>
+  <div class="phones">
+   <figure><img src="img/phone-email.png" alt="The Amazon.co.za feature in the email on a phone">
+    <figcaption><b>1. They read it.</b> The feature opens with a clear promise: grow your business by selling on Amazon.co.za.</figcaption></figure>
+   <figure><img src="img/phone-tap.png" alt="Tapping the Explore selling button on a phone">
+    <figcaption><b>2. They tap.</b> One button, "Explore selling on Sellercentral.Amazon.co.za".</figcaption></figure>
+   <figure><img src="img/phone-landing.png" alt="The Amazon Seller Central page on a phone">
+    <figcaption><b>3. They land on Amazon.</b> Straight onto the Amazon South Africa seller page, with the R1 a month offer and the Sign up button.</figcaption></figure>
   </div>
  </div>
 </section>
 
 <section>
  <div class="w">
-  <div class="eyebrow">Building on it</div>
-  <h2>Where the next placement can go further</h2>
-  <div class="next">
-   <div><h4>A dedicated email</h4><p>A send about selling on Amazon.co.za alone, so the offer is the subject line and the whole email, not one feature among several.</p></div>
-   <div><h4>The readers most likely to sell</h4><p>Target the members already reading about e-commerce, retail and side hustles, who are closest to opening a seller account.</p></div>
-   <div><h4>Black Friday timing</h4><p>A reminder close to Black Friday, when the R1 a month offer and the festive season give sellers the strongest reason to start now.</p></div>
+  <div class="eyebrow">From the Kit report</div>
+  <h2>The numbers as our email platform records them</h2>
+  <p class="lede">Screenshots from the Kit report for this edition. Kit counts the opens and clicks.</p>
+  <div class="two even">
+   <figure><img src="img/kit-overview.png" alt="Kit report overview for the edition">
+    <figcaption><b>Overview:</b> 52 957 recipients, sent 27 October 2026 at 09:03.</figcaption></figure>
+   <figure><img src="img/kit-clicks-amazon.png" alt="Kit clicks report for the Amazon link">
+    <figcaption><b>Clicks on the Amazon link:</b> 29.</figcaption></figure>
   </div>
  </div>
 </section>
